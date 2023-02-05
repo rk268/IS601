@@ -3,12 +3,12 @@ a2 = [1.99, 1.99, 0.99, 1.99, 0.99, 1.99, 0.99, 0.99]
 a3 = [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
 a4 = [10.01, -12.22, 0.23, 19.20, -5.13, 3.12]
 
-
+#UCID-rk268 Date- 2/5/2023
 def process_array(num, arr):
     print("\nProcessing Array({}): \n\n".format(num))
     print(arr)
     total = 0.00
-    # TODO add necessary code here for sum; every number must have two decimal places shown
+    #TODO add necessary code here for sum; every number must have two decimal places shown
     #print("\nThe total is {}:\n".format(total))
     for i in range(0,len(arr)):
         total = total + arr[i]
