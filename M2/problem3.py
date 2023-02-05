@@ -9,6 +9,23 @@ def process_array(num, arr):
     print(arr)
     print("\nPositive Output:\n")
     # TODO add new code here to print the desired result
+    for i in range(0,len(arr)):
+        if(type(arr[i])==int):
+            if(arr[i]<0):
+                ans=arr[i]*(-1)
+                print(ans, end=" ")
+            else:
+                print(arr[i], end=" ")
+
+        elif(type(arr[i])==float):
+            if(arr[i]<0):
+                ans=arr[i]*(-1)
+                print(ans, end=" ")
+        else:
+            if(type(arr[i]==str)):
+                r= arr[i].replace('-', "")
+                print('\'{}\''.format(r), end=" ")
+                #print(type(arr[i]),end=" ")
 
 
 print("Problem 3")
