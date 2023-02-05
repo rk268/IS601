@@ -3,7 +3,7 @@ a2 = [0, 1, 3, 5, 7, 9, 2, 4, 6, 8, 10]
 a3 = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 a4 = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10]
 
-#UCID-rk268 Date- 2/5/2023
+#UCID-rk268 Date-2/5/2023
 def process_array(num, arr):
     print("\nProcessing Array({}): \n\n".format(num))
     print(arr)

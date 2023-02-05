@@ -3,7 +3,7 @@ a2 = [-1, 1, -2, 2, 3, -3, -4, 5]
 a3 = [-0.01, -0.0001, -.15]
 a4 = ["-1", "2", "-3", "4", "-5", "5", "-6", "6", "-7", "7"]
 
-#UCID-rk268 Date- 2/5/2023
+#UCID-rk268 Date-2/5/2023
 def process_array(num, arr):
     print("\nProcessing Array({}): \n\n".format(num))
     print(arr)
