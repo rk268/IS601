@@ -15,9 +15,12 @@ def process_array(num, arr):
             if(int(arr[i])<0):
                 abcd=int(arr[i])*(-1)
                 abcd=str(abcd)
-                print('\'{}\''.format(abcd), end=" ")
+                print('\'{}\''.format(abcd), type(abcd), end=" ")
+                #[print(f"{type(abcd)}, ")]
+
             else:
-                print(str('\'{}\''.format(arr[i])), end=" ")
+                print(str('\'{}\''.format(arr[i])), type(arr[i]), end=" ")
+                #[print(f"{type(str)}, ")]
         elif(type(arr[i]==int)):
             if(arr[i]<0):
                 abcd=arr[i]*(-1)

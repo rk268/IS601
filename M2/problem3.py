@@ -25,7 +25,9 @@ def process_array(num, arr):
             if(type(arr[i]==str)):
                 r= arr[i].replace('-', "")
                 print('\'{}\''.format(r), end=" ")
-                #print(type(arr[i]),end=" ")
+                print(type(arr[i]),end=" ")
+                #[print(f"{arr[i]} {type(arr[i])}, ") for i in arr]
+
 
 
 print("Problem 3")
