@@ -1,0 +1,31 @@
+<table><tr><td> <em>Assignment: </em> Sample Flask App and Readings</td></tr>
+<tr><td> <em>Student: </em> Rupak Avinash Kulkarni (rk268)</td></tr>
+<tr><td> <em>Generated: </em> 3/6/2023 10:57:39 PM</td></tr>
+<tr><td> <em>Grading Link: </em> <a rel="noreferrer noopener" href="https://learn.ethereallab.app/homework/IS601-004-S23/sample-flask-app-and-readings/grade/rk268" target="_blank">Grading</a></td></tr></table>
+<table><tr><td> <em>Instructions: </em> <ol><li>&nbsp;Follow the slides from class.&nbsp;</li><li>&nbsp;Get the sample app deployed to Heroku dev</li><li>&nbsp;Once finished with the slides create a pull request from the lesson branch to dev (don't close it yet)&nbsp;</li><li>&nbsp;Create an m6_submission.md file in the same directory as the flask sample app&nbsp;</li><li>&nbsp;Fill in the deliverables below&nbsp;</li><li>&nbsp;Generate the markdown and paste the content into the new md file&nbsp;</li><li>&nbsp;git add/commit/push&nbsp;</li><li>&nbsp;Complete the pull request&nbsp;</li><li>&nbsp;Create a pull request from dev to prod&nbsp;</li><li>&nbsp;Complete the merge&nbsp;</li><li>&nbsp;Locally checkout dev&nbsp;</li><li>&nbsp;git pull the latest dev changes&nbsp;</li><li>&nbsp;On GitHub navigate to the location of the m6_submission.md file from the prod branch&nbsp;</li><li>&nbsp;Grab that direct link and submit it to Canvas</li></ol></td></tr></table>
+<table><tr><td> <em>Deliverable 1: </em> Proof App has been deployed </td></tr><tr><td><em>Status: </em> <img width="100" height="20" src="https://user-images.githubusercontent.com/54863474/211707773-e6aef7cb-d5b2-4053-bbb1-b09fc609041e.png"></td></tr>
+<tr><td><table><tr><td> <em>Sub-Task 1: </em> Screenshot the output of the app (including the url) showing it's running from Heroku dev</td></tr>
+<tr><td><table><tr><td><img width="768px" src="https://user-images.githubusercontent.com/123113077/223309147-978ed166-c815-4f9c-9e01-5438a874de1a.png"/></td></tr>
+<tr><td> <em>Caption:</em> <p>Screenshot of the output of an app(including URL)<br></p>
+</td></tr>
+</table></td></tr>
+<tr><td> <em>Sub-Task 2: </em> Add a direct link to the app here (prod url)</td></tr>
+<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://is601-rk268-prod.herokuapp.com/">https://is601-rk268-prod.herokuapp.com/</a> </td></tr>
+</table></td></tr>
+<table><tr><td> <em>Deliverable 2: </em> Misc </td></tr><tr><td><em>Status: </em> <img width="100" height="20" src="https://user-images.githubusercontent.com/54863474/211707773-e6aef7cb-d5b2-4053-bbb1-b09fc609041e.png"></td></tr>
+<tr><td><table><tr><td> <em>Sub-Task 1: </em> Add a link to the pull request from Flask-Sample-HW to Dev</td></tr>
+<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/rk268/IS601/pull/12">https://github.com/rk268/IS601/pull/12</a> </td></tr>
+<tr><td> <em>Sub-Task 2: </em> Did you have any issues during setup and if so how did you resolve them, otherwise what did you learn?</td></tr>
+<tr><td> <em>Response:</em> <p>Was getting errors while building the actions. Had to go through the video<br>uploaded several times. Had to make changes in the gitignore file again.<br></p><br></td></tr>
+</table></td></tr>
+<table><tr><td> <em>Deliverable 3: </em> Readings </td></tr><tr><td><em>Status: </em> <img width="100" height="20" src="https://user-images.githubusercontent.com/54863474/211707773-e6aef7cb-d5b2-4053-bbb1-b09fc609041e.png"></td></tr>
+<tr><td><table><tr><td> <em>Sub-Task 1: </em> What can you tell me about docker? Describe the various steps needed to get an app ran inside a docker container in your own words</td></tr>
+<tr><td> <em>Response:</em> <p>Docker are likely virtual environments. They have containers in them. These containers are<br>lightweight and efficient and they can run in isolated environments. Dockers provide a<br>easy and suitable way to pack and transfer or send these containers anywhere.<div>Basically,<br>if I have a setup at my end and my friend wants to<br>run some code with my setup. He can use my container in his<br>system and run the code over that like a virtual environment. This is<br>small application of a docker.</div><div>I added the the docker file, in the flask_sample,<br>with name Dockerfile.</div><div>This docker file checks the python requirements. Also it makes the<br>containers.</div><br></p><br></td></tr>
+<tr><td> <em>Sub-Task 2: </em> What is Heroku? Why do you feel it was chosen for this class?</td></tr>
+<tr><td> <em>Response:</em> <p>Heroku is a cloud on which the user can easily deploy their workflow.<br>Heroku is flexible and easy to use as the user need not to<br>worry regarding the below infrastructure. Also it is easy to integrate with the<br>github.<br></p><br></td></tr>
+<tr><td> <em>Sub-Task 3: </em> What is flask? List a few things you learned about it</td></tr>
+<tr><td> <em>Response:</em> <p>Flask is a python module and web framework on it. There is lot<br>of documentation available on it. It has minimal overhead hence good for developers.<br></p><br></td></tr>
+<tr><td> <em>Sub-Task 4: </em> What is the difference between a Dockerfile and a Github Action .yml file?</td></tr>
+<tr><td> <em>Response:</em> <p>Dockerfile is a text file, which is used by Docker to build an<br>image which inturn used for docker container.&nbsp;<span style="letter-spacing: 0.09996px;">Github Action .yml&nbsp;&nbsp;is used to<br>write a workflow for automation of work. It is used for running tests<br>and applications in various environments. It has several steps written in sequence which<br>get executed in order.</span><div><span style="letter-spacing: 0.09996px;">Basically both files are used for a different<br>things but used in pairs as both if used together can help programmers<br>to deploy their web code easily.</span></div><br></p><br></td></tr>
+</table></td></tr>
+<table><tr><td><em>Grading Link: </em><a rel="noreferrer noopener" href="https://learn.ethereallab.app/homework/IS601-004-S23/sample-flask-app-and-readings/grade/rk268" target="_blank">Grading</a></td></tr></table>
