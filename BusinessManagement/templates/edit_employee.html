@@ -12,9 +12,18 @@
             first_name (required)
             last_name (required)
             email (required)
+            
             and prefill the fields with loaded employee data
             #}
+            <label for="first_name">First Name:</label><br>
+            <input type="text" id="first_name" name="first_name" required><br>
+            <label for="last_name">Last Name:</label><br>
+            <input type="text" id="last_name" name="last_name" required><br>
+            <label for="email">email:</label><br>
+            <input type="email" id="email" name="email" required><br>
+            
             {# use the below for company selection #}
+            
             {{ company_dropdown(employee.company) }}
             <input type="submit" class="btn btn-primary" value="Save Employee" />
         </form>

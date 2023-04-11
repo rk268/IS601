@@ -15,14 +15,27 @@
     #}
     <form method="GET">
         <div class="row">
+            <div class="col">
+                <input class="form-control" placeholder="company name" type="text" id="name" name="name">
+            </div>
             {{country_state_selector(layout="horizontal")}}
-            {{sort_filter(cols=[...])}}
+
+            {{sort_filter(cols=[('name', 'name'),('city', 'city'),('country', 'country'),('state', 'state')])}}
+
+            <div class="col">
+                <input class="form-control" placeholder="Limit" type="number" min="1" max="100" id="limit" name="limit" value="{{request.args.get('limit') or '10'}}" />
+            </div>
+
             <div class="col">
                 <input type="submit" class="btn btn-primary" value="Filter" />
             </div>
+
             <div class="col">
                 <a href="?" class="btn btn-secondary">Reset</a>
             </div>
+
+
+            
         </div>
     </form>
     <div class="table-responsive">
@@ -46,6 +59,19 @@
                 an edit button that passes the company id to company edit
                 a delete button that passes the company id and the request args to the company delete route
                 #}
+                {% for r in rows %}
+                <tr>
+                    {% for v in r.values() %}
+                    <td>{{v}}</td>
+                    {% endfor %}
+                    <td><a href="{{url_for('company.edit', id=r.get('id'))}}" >Edit</a>
+                        {# **request.args spreads the key value pairs to be part of the url#}
+                        {# the idea is to pass it to the next route #}
+                        <a href="{{url_for('company.delete', id=r.get('id'))}}" class=" btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+
 
             </tbody>
             {% else %}

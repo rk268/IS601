@@ -17,9 +17,19 @@
             website (not required)
             and prefill the fields with loaded company data
             #}
-
+            <label for="name">Name:</label><br>
+            <input type="text" id="Name" name="Name" required><br>
+            <label for="address">address:</label><br>
+            <input type="text" id="address" name="address" required><br>
+            <label for="website">website</label><br>
+            <input type="text" id="website" name="website" required><br>
+            <label for="city">city:</label><br>
+            <input type="text" id="city" name="city" required><br>
             {# use this for country/state selection #}
             {{country_state_selector(country=company.country, state=company.state)}}
+            <label for="zip">Zip:</label><br>
+            <input type="text" id="zip" name="zip" required><br>
+
 
             <input type="submit" class="btn btn-primary" value="Save Company" />
         </form>
