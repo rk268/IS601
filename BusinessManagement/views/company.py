@@ -186,7 +186,7 @@ def add():
 @company.route("/edit", methods=["GET", "POST"])
 def edit():
     # TODO edit-1 request args id is required (flash proper error message)
-    # UCID: pg493 Date: 08/09/2023
+    # UCID: rk268 Date: 08/09/2023
     #id = False
     id = request.args.get("id")
     print(id)
@@ -197,7 +197,7 @@ def edit():
         if request.method == "POST":
             data = {} # use this as needed, can convert to tuple if necessary
             # TODO edit-1 retrieve form data for name, address, city, state, country, zip, website
-            # UCID: pg493 Date: 08/09/2023
+            # UCID: rk268 Date: 08/09/2023
             name = request.form.get("Name")
             address = request.form.get("address")
             city = request.form.get("city")
@@ -209,41 +209,41 @@ def edit():
                 website = request.form.get("website")
 
             # TODO edit-2 name is required (flash proper error message)
-            # UCID: pg493 Date: 08/09/2023
+            # UCID: rk268 Date: 08/09/2023
             if(name==""):
                 flash("Name cannot be empty ","danger")
                 has_error = True
             # TODO edit-3 address is required (flash proper error message)
-            # UCID: pg493 Date: 08/09/2023
+            # UCID: rk268 Date: 08/09/2023
             if(address==""):
                 flash("Address cannot be empty ","danger")
                 has_error = True
             # TODO edit-4 city is required (flash proper error message)
-            # UCID: pg493 Date: 08/09/2023
+            # UCID: rk268 Date: 08/09/2023
             if(city==""):
                 flash("City cannot be empty ","danger")
                 has_error = True
             # TODO edit-5 state is required (flash proper error message)
-            # UCID: pg493 Date: 08/09/2023
+            # UCID: rk268 Date: 08/09/2023
             if(state==""):
                 flash("State cannot be empty ","danger")
                 has_error = True
             # TODO edit-5a state should be a valid state mentioned in pycountry for the selected state
             # hint see geography.py and pycountry documentation
-            # UCID: pg493 Date: 08/09/2023
+            # UCID: rk268 Date: 08/09/2023
             # TODO edit-6 country is required (flash proper error message)
-            # UCID: pg493 Date: 08/09/2023
+            # UCID: rk268 Date: 08/09/2023
             if(country==""):
                 flash("Country cannot be empty ","danger")
                 has_error = True
             # TODO edit-6a country should be a valid country mentioned in pycountry
-            # UCID: pg493 Date: 08/09/2023
+            # UCID: rk268 Date: 08/09/2023
             # hint see geography.py and pycountry documentation
             # TODO edit-7 website is not required
-            # UCID: pg493 Date: 08/09/2023
+            # UCID: rk268 Date: 08/09/2023
             flash("Website is optional ","warning")
             # TODO edit-8 zipcode is required (flash proper error message)
-            # UCID: pg493 Date: 08/09/2023
+            # UCID: rk268 Date: 08/09/2023
             if(zipcode==""):
                 flash("Zip cannot be empty.","danger")
                 has_error = True
@@ -261,7 +261,7 @@ def edit():
             if not has_error:
                 try:
                     # TODO edit-9 fill in proper update query
-                    # UCID: pg493 Date: 08/09/2023
+                    # UCID: rk268 Date: 08/09/2023
                     # name, address, city, state, country, zip, website
                     result = DB.update("""UPDATE IS601_MP3_Companies SET name=%(name)s, address=%(address)s, 
                                     city=%(city)s, website=%(website)s, state=%(state)s, country=%(country)s, 
@@ -273,23 +273,23 @@ def edit():
                     return redirect(url_for('company.search', name="", order="asc", column="", limit=10))
                 except Exception as e:
                     # TODO edit-10 make this user-friendly
-                    # UCID: pg493 Date: 08/09/2023
+                    # UCID: rk268 Date: 08/09/2023
                     print(f"{e}")
                     flash("Error!!The updation of the database failed", "danger")
         row = {}
         try:
             # TODO edit-11 fetch the updated data
-            # UCID: pg493 Date: 08/09/2023
+            # UCID: rk268 Date: 08/09/2023
             result = DB.selectOne("""SELECT id, name, address, city, country , state, zip, website 
                                 FROM IS601_MP3_Companies WHERE id=%s""", id)
             if result.status:
                 row = result.row
         except Exception as e:
             # TODO edit-12 make this user-friendly
-            # UCID: pg493 Date: 08/09/2023
+            # UCID: rk268 Date: 08/09/2023
             flash("Error occured! The data cannot be retrived", "danger")
     # TODO edit-13 pass the company data to the render template
-    # UCID: pg493 Date: 08/09/2023
+    # UCID: rk268 Date: 08/09/2023
     return render_template("edit_company.html", company=row)
 
 @company.route("/delete", methods=["GET"])
