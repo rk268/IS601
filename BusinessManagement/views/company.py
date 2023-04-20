@@ -1,6 +1,6 @@
 from flask import Blueprint, redirect, render_template, request, flash, url_for
 from sql.db import DB
-import pycountry
+#import pycountry
 company = Blueprint('company', __name__, url_prefix='/company')
 
 @company.route("/search", methods=["GET"])
