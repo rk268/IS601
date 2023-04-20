@@ -198,7 +198,7 @@ def edit():
             data = {} # use this as needed, can convert to tuple if necessary
             # TODO edit-1 retrieve form data for name, address, city, state, country, zip, website
             # UCID: pg493 Date: 08/09/2023
-            name = request.form.get("name")
+            name = request.form.get("Name")
             address = request.form.get("address")
             city = request.form.get("city")
             state = request.form.get("state")
