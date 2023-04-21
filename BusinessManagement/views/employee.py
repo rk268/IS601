@@ -112,8 +112,7 @@ def add():
             flash("Last Name field is required","warning")
         # TODO add-4 company (may be None)
         # ucid: rk268 Date: 08/09/2023
-        if len(company_id) == 0:
-            flash("Company field is required","warning")
+
         # TODO add-5 email is required (flash proper error message)
         # ucid: rk268 Date: 08/09/2023
         if len(email) == 0:
