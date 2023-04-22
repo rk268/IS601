@@ -96,6 +96,7 @@ def search():
 @employee.route("/add", methods=["GET","POST"])
 def add():
     if request.method == "POST":
+        has_error = False # use this to control whether or not an insert occurs
         # TODO add-1 retrieve form data for first_name, last_name, company, email
         # ucid: rk268 Date: 08/09/2023
         first_name = request.form.get("first_name", None)
@@ -106,25 +107,27 @@ def add():
         # ucid: rk268 Date: 08/09/2023
         if len(first_name) == 0:
             flash("First Name field is required","warning")
+            has_error = True
         # TODO add-3 last_name is required (flash proper error message)
         # ucid: rk268 Date: 08/09/2023
         if len(last_name) == 0:
             flash("Last Name field is required","warning")
+            has_error = True
         # TODO add-4 company (may be None)
         # ucid: rk268 Date: 08/09/2023
-        if len(company_id) == 0:
-            flash("Company field is required","warning")
+
         # TODO add-5 email is required (flash proper error message)
         # ucid: rk268 Date: 08/09/2023
         if len(email) == 0:
             flash("Email field is required","warning")
+            has_error = True
         # TODO add-5a verify email is in the correct format
         # ucid: rk268 Date: 08/09/2023
         email_regex = r"[^@]+@[^@]+\.[^@]+"
         if re.match(email_regex, email) is not None == False:
             flash("Email is not in correct format.","warning")
         
-        has_error = False # use this to control whether or not an insert occurs
+        
         
         employee_dict={}
         employee_dict["first_name"] = first_name
@@ -165,27 +168,30 @@ def edit():
         return redirect(url_for("employee.search"))
     else:
         if request.method == "POST":
-            
+            #rk268 4/21
             # TODO edit-1 retrieve form data for first_name, last_name, company, email
             first_name = request.form.get("first_name")
             last_name = request.form.get("last_name")
             company = request.form.get("company")
             email = request.form.get("email")
-                
+            #rk268 4/21   
             # TODO edit-2 first_name is required (flash proper error message)
             if(first_name==""):
                 flash("First Name field is required","warning")
                 has_error = True
+            #rk268 4/21
             # TODO edit-3 last_name is required (flash proper error message)
             if(last_name==""):
                 flash("Last Name field is required","warning")
                 has_error = True
+            #rk268 4/21
             # TODO edit-4 company (may be None)
             #flash("Company field is optional")
             # TODO edit-5 email is required (flash proper error message)
             if(email==""):
                 flash("Email field is required","warning")
                 has_error = True
+            #rk268
             # TODO edit-5a verify email is in the correct format
             email_check = "^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-z]{1,3}$"
             if re.match(email_check,email):
@@ -202,8 +208,10 @@ def edit():
             employee_dict["company_name"]= company
             employee_dict["e_id"]= id
             if not has_error:
+                print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
                 try:
                     # TODO edit-6 fill in proper update query
+                    #rk268 4/21
                     result = DB.update("""UPDATE IS601_MP3_Employees SET first_name=%(first_name)s, last_name=%(last_name)s, email=%(email)s, company_id=%(company_name)s WHERE id=%(e_id)s
                     """, employee_dict)
                     if result.status:
@@ -215,7 +223,8 @@ def edit():
                     print(str(e))
         row = {}
         try:
-            # TODO edit-8 fetch the updated data 
+            # TODO edit-8 fetch the updated data
+            # rk268 4/21 
             result = DB.selectOne("SELECT employees.id as id, first_name, last_name, email, companies.id as company_id, IF(name is not null, name,'N/A') as company_name FROM IS601_MP3_Employees employees LEFT JOIN IS601_MP3_Companies companies ON employees.company_id=companies.id WHERE employees.id=%s", id)
             if result.status:
                 row = result.row
@@ -223,6 +232,7 @@ def edit():
             # TODO edit-9 make this user-friendly
             flash("Error occured! The data cannot be retrived", "danger")
     # TODO edit-10 pass the employee data to the render template
+    #rk268 4/21S
     return render_template("edit_employee.html",employee=row)
 
 @employee.route("/delete", methods=["GET"])

@@ -82,7 +82,7 @@ def off_test_filter_state(client):
     args = ["NJ"]
     url = f"/company/search?state={args[0]}"
     query_and_get_assert(query=query, args=args, target=target, client=client, url=url)
- 
+
 
 def off_test_sort_asc_name(client):
     target = "name"
