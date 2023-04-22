@@ -96,6 +96,7 @@ def search():
 @employee.route("/add", methods=["GET","POST"])
 def add():
     if request.method == "POST":
+        has_error = False # use this to control whether or not an insert occurs
         # TODO add-1 retrieve form data for first_name, last_name, company, email
         # ucid: rk268 Date: 08/09/2023
         first_name = request.form.get("first_name", None)
@@ -126,7 +127,7 @@ def add():
         if re.match(email_regex, email) is not None == False:
             flash("Email is not in correct format.","warning")
         
-        has_error = False # use this to control whether or not an insert occurs
+        
         
         employee_dict={}
         employee_dict["first_name"] = first_name
