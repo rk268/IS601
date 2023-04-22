@@ -106,10 +106,12 @@ def add():
         # ucid: rk268 Date: 08/09/2023
         if len(first_name) == 0:
             flash("First Name field is required","warning")
+            has_error = True
         # TODO add-3 last_name is required (flash proper error message)
         # ucid: rk268 Date: 08/09/2023
         if len(last_name) == 0:
             flash("Last Name field is required","warning")
+            has_error = True
         # TODO add-4 company (may be None)
         # ucid: rk268 Date: 08/09/2023
 
@@ -117,6 +119,7 @@ def add():
         # ucid: rk268 Date: 08/09/2023
         if len(email) == 0:
             flash("Email field is required","warning")
+            has_error = True
         # TODO add-5a verify email is in the correct format
         # ucid: rk268 Date: 08/09/2023
         email_regex = r"[^@]+@[^@]+\.[^@]+"
