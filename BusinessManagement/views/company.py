@@ -10,12 +10,14 @@ def search():
 
     # TODO search-1 retrieve id, name, address, city, country, state, zip, website, employee count as employees for the company
     # don't do SELECT *
+    #rk268 4/21
     query = """SELECT id, name, address, city, country , state, zip, website, (SELECT count(id) FROM IS601_MP3_Employees WHERE c.id=company_id GROUP BY company_id)
         as employees from IS601_MP3_Companies as c WHERE 1=1"""
 
     args = {} # <--- add values to replace %s/%(named)s placeholders
     allowed_columns = ["name", "city", "country", "state"]
     # TODO search-2 get name, country, state, column, order, limit request args
+    #rk268 4/21
     name = request.args.get("name")
     state = request.args.get("state")
     country = request.args.get("country")
@@ -25,21 +27,25 @@ def search():
 
     company_dict={}
     # TODO search-3 append a LIKE filter for name if provided
+    #rk268 4/21
     if(name != ""):
         company_dict["name"] = "%"+str(name)+"%"
         query= query+ """ AND name like %(name)s """
 
     # TODO search-4 append an equality filter for country if provided
+    #rk268 4/21
     if country:
         query = query+ """ AND country = %(country)s"""
         company_dict["country"] = country
 
     # TODO search-5 append an equality filter for state if provided
+    #rk268 4/21
     if state:
         query = query+ """ AND state = %(state)s"""
         company_dict["state"] = state
 
     # TODO search-6 append sorting if column and order are provided and within the allows columsn and allowed order asc,desc
+    #rk268 4/21 
     if column and order:
         if column in allowed_columns and order in ["asc", "desc"]:
             query = query + " ORDER BY {} {}".format(column.lower(), order.lower())
@@ -49,6 +55,7 @@ def search():
     # TODO search-7 append limit (default 10) or limit greater than 1 and less than or equal to 100
 
     # TODO search-8 provide a proper error message if limit isn't a number or if it's out of bounds
+    #rk268 4/21
         if(limit!=None):
             if(int(limit) > 0 and int(limit) <= 100):
                 query = query+ " LIMIT %(limit)s"
@@ -76,6 +83,7 @@ def search():
             print(f"rows {rows}")
     except Exception as e:
         # TODO search-9 make message user friendly
+        #rk268 4/21
         flash("Error!! - Cannot fetch the required data", "Danger")
         print(str(e))
     # hint: use allowed_columns in template to generate sort dropdown
@@ -96,6 +104,7 @@ def add():
         country = request.form.get("country")
         state = request.form.get("state")
         print(n)
+        #rk268 4/21
 
         if(n == ""):
             flash("please enter name", "warning")
@@ -103,6 +112,7 @@ def add():
             return render_template("add_company.html")
         else:
             has_error = False
+        #rk268 4/21
 
         if(add == ""):
             flash("please enter address", "warning")
@@ -110,6 +120,7 @@ def add():
             return render_template("add_company.html")
         else:
             has_error = False
+        #rk268 4/21
 
         if(city == ""):
             flash("please enter city", "warning")
@@ -117,6 +128,7 @@ def add():
             return render_template("add_company.html")
         else:
             has_error = False
+        #rk268 4/21
 
         if(zip == ""):
             flash("please enter zip", "warning")
@@ -124,6 +136,7 @@ def add():
             return render_template("add_company.html")
         else:
             has_error = False
+        #rk268 4/21
 
         if(country == ""):
             flash("please enter country", "warning")
@@ -131,13 +144,14 @@ def add():
             return render_template("add_company.html")
         else:
             has_error = False
-
+        #rk268 4/21
         if(state == ""):
             flash("please enter state", "warning")
             has_error = True
             return render_template("add_company.html")
         else:
             has_error = False
+        #rk268 4/21
 
             
 
@@ -168,6 +182,7 @@ def add():
 
         if not has_error:
             try:
+                #rk268 4/21
                 result = DB.insertOne("""INSERT INTO IS601_MP3_Companies (name, address, city, country,state,zip,website)
                     VALUES (%(name)s, %(address)s, %(city)s, %(country)s, %(state)s, %(zip)s, %(website)s)
                     ON DUPLICATE KEY UPDATE 
@@ -176,6 +191,7 @@ def add():
                 ) # <-- TODO add-8 add query and add arguments
                 print(result)
                 if result.status:
+                #rk268 4/21
                     flash("Added Company", "success")
             except Exception as e:
                 # TODO add-9 make message user friendly
@@ -207,6 +223,7 @@ def edit():
             website = request.args.get("website")
             if(request.form.get("website")):
                 website = request.form.get("website")
+            has_error = False # use this to control whether or not an insert occurs
 
             # TODO edit-2 name is required (flash proper error message)
             # UCID: rk268 Date: 08/09/2023
@@ -249,7 +266,7 @@ def edit():
                 has_error = True
             # note: call zip variable zipcode as zip is a built in function it could lead to issues
             # populate data dict with mappings
-            has_error = False # use this to control whether or not an insert occurs
+            
             data["name"] = name
             data["address"] = address
             data["city"] = city
