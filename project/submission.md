@@ -1,6 +1,6 @@
 <table><tr><td> <em>Assignment: </em> IS601 Milestone1 Deliverable</td></tr>
 <tr><td> <em>Student: </em> Rupak Avinash Kulkarni (rk268)</td></tr>
-<tr><td> <em>Generated: </em> 4/28/2023 11:24:00 AM</td></tr>
+<tr><td> <em>Generated: </em> 4/28/2023 11:36:39 AM</td></tr>
 <tr><td> <em>Grading Link: </em> <a rel="noreferrer noopener" href="https://learn.ethereallab.app/homework/IS601-004-S23/is601-milestone1-deliverable/grade/rk268" target="_blank">Grading</a></td></tr></table>
 <table><tr><td> <em>Instructions: </em> <ol><li>Checkout Milestone1 branch</li><li>Create a milestone1.md file in your Project folder</li><li>Git add/commit/push this empty file to Milestone1 (you'll need the link later)</li><li>Ensure your images display correctly in the sample markdown at the bottom</li><ol><li>NOTE: You may want to try to capture as much checklist evidence in your screenshots as possible, you do not need individual screenshots and are recommended to combine things when possible. Also, some screenshots may be reused if applicable.</li></ol><li>Save the submission items</li><li>Copy/paste the markdown from the "Copy markdown to clipboard link" or via the download button</li><li>Paste the code into the milestone1.md file or overwrite the file</li><li>Git add/commit/push the md file to Milestone1</li><li>Double check the images load when viewing the markdown file (points will be lost for invalid/non-loading images)</li><li>Make a pull request from Milestone1 to dev and merge it (resolve any conflicts)<ol><li>Make sure everything looks ok on heroku dev</li></ol></li><li>Make a pull request from dev to prod (resolve any conflicts)<ol><li>Make sure everything looks ok on heroku prod</li></ol></li><li>Submit the direct link from github prod branch to the milestone1.md file (no other links will be accepted and will result in 0)</li></ol></td></tr></table>
 <table><tr><td> <em>Deliverable 1: </em> Feature: User will be able to register a new account </td></tr><tr><td><em>Status: </em> <img width="100" height="20" src="https://user-images.githubusercontent.com/54863474/211707773-e6aef7cb-d5b2-4053-bbb1-b09fc609041e.png"></td></tr>
@@ -30,7 +30,7 @@
 </td></tr>
 </table></td></tr>
 <tr><td> <em>Sub-Task 3: </em> Add the related pull request(s) for this feature</td></tr>
-<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/rk268/IS601/pull/29">https://github.com/rk268/IS601/pull/29</a> </td></tr>
+<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/rk268/IS601/pull/30">https://github.com/rk268/IS601/pull/30</a> </td></tr>
 <tr><td> <em>Sub-Task 4: </em> Explain briefly how the process/code works</td></tr>
 <tr><td> <em>Response:</em> <div>1)The FlaskForm class is used to generate a form class that inherits WTF.<br>This class defines fields, field types, and validations. Now, all we have to<br>do is access form fields and deliver the endpoint function's</div><div>request.</div><div>2) WTF forms on<br>the client side typically handle the internal validation defined in the custom form<br>class. However, we also use the WTF from function valid_on_submit() on the server<br>side to validate the form data once again. If any validation fails at<br>this time, validation errors are stored in the form object's errors field and<br>the form object is sent back to the frontend, where the validation error<br>is shown.</div><div>3) The password is first hashed whenever a new user registers, and<br>then the hashed value is stored in db</div><br></td></tr>
 </table></td></tr>
@@ -49,7 +49,7 @@
 </td></tr>
 </table></td></tr>
 <tr><td> <em>Sub-Task 3: </em> Add the related pull request(s) for this feature</td></tr>
-<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/rk268/IS601/pull/29">https://github.com/rk268/IS601/pull/29</a> </td></tr>
+<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/rk268/IS601/pull/30">https://github.com/rk268/IS601/pull/30</a> </td></tr>
 <tr><td> <em>Sub-Task 4: </em> Explain briefly how the process/code works</td></tr>
 <tr><td> <em>Response:</em> <div>1. We can define a form class by inheriting from the FlaskForm class<br>in which we can specify the fields, field types, and validations. Then, we<br>can use this form object in our endpoint function to serve the request<br>by accessing the form fields.</div><div>2. The validations defined in the custom form class<br>are typically handled internally by WTF forms on the client-side. However, on the<br>server-side, we use the valid_on_submit() method of the WTF form, which again validates<br>the form fields. If any validation fails, the validation errors are stored in<br>the errors field of the form object, which is then returned to the<br>frontend where the validation error is displayed.</div><div>3. To enhance security, the password is<br>first hashed and the hashed value is then stored in the database. Whenever<br>a user tries to log in, the password entered by the user is<br>hashed, and this hash value is compared with the stored hash value in<br>the database.</div><br></td></tr>
 </table></td></tr>
@@ -65,7 +65,7 @@
 </td></tr>
 </table></td></tr>
 <tr><td> <em>Sub-Task 3: </em> Add the related pull request(s) for this feature</td></tr>
-<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/rk268/IS601/pull/29">https://github.com/rk268/IS601/pull/29</a> </td></tr>
+<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/rk268/IS601/pull/30">https://github.com/rk268/IS601/pull/30</a> </td></tr>
 <tr><td> <em>Sub-Task 4: </em> Explain briefly how the process/code works</td></tr>
 <tr><td> <em>Response:</em> <div><div>Any time a user tries to visit a login-protected page, the session data<br>is checked to see if the user is authenticated; if not, the is_authenticated<br>flag remains false and the user is prevented from accessing the login-protected pages.<br>Basically, the session is set anytime a person logs in with their username,<br>email, password, and roles. The user will be able to access the login-protected<br>website during that period without having to log in since the session is<br>brief and only valid for 30 minutes.&nbsp;</div></div><div><br></div><div><br></div><br></td></tr>
 </table></td></tr>
@@ -94,7 +94,7 @@
 </td></tr>
 </table></td></tr>
 <tr><td> <em>Sub-Task 5: </em> Add the related pull request(s) for these features</td></tr>
-<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/rk268/IS601/pull/29">https://github.com/rk268/IS601/pull/29</a> </td></tr>
+<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/rk268/IS601/pull/30">https://github.com/rk268/IS601/pull/30</a> </td></tr>
 <tr><td> <em>Sub-Task 6: </em> Explain briefly how the process/code works for login-protected pages</td></tr>
 <tr><td> <em>Response:</em> <p>Any time a user tries to visit a login-protected page, the session data<br>is checked to see if the user is authenticated; if not, the is_authenticated<br>flag remains false and the user is prevented from accessing the login-protected pages.<br>Basically, the session is set anytime a person logs in with their username,<br>email, password, and roles. The user will be able to access the login-protected<br>website during that period without having to log in since the session is<br>brief and only valid for 30 minutes.&nbsp;<br></p><br></td></tr>
 <tr><td> <em>Sub-Task 7: </em> Explain briefly how the process/code works for role-protected pages</td></tr>
@@ -113,7 +113,7 @@
 </td></tr>
 </table></td></tr>
 <tr><td> <em>Sub-Task 2: </em> Add the related pull request(s) for this feature</td></tr>
-<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/rk268/IS601/pull/29">https://github.com/rk268/IS601/pull/29</a> </td></tr>
+<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/rk268/IS601/pull/30">https://github.com/rk268/IS601/pull/30</a> </td></tr>
 <tr><td> <em>Sub-Task 3: </em> Briefly explain your CSS at a high level</td></tr>
 <tr><td> <em>Response:</em> <div>The internal styling of the built-in form classes is utilized for styling. The<br>navigation class, whose styles are inherited, is used for navigating.</div><div><br></div><br></td></tr>
 </table></td></tr>
@@ -133,7 +133,7 @@
 </td></tr>
 </table></td></tr>
 <tr><td> <em>Sub-Task 2: </em> Add a related pull request</td></tr>
-<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/rk268/IS601/pull/29">https://github.com/rk268/IS601/pull/29</a> </td></tr>
+<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/rk268/IS601/pull/30">https://github.com/rk268/IS601/pull/30</a> </td></tr>
 <tr><td> <em>Sub-Task 3: </em> Briefly explain how you made messages user friendly</td></tr>
 <tr><td> <em>Response:</em> <p>When an email or username already exists, a duplicate key error is generated<br>by the update/insert statement, which is then caught by the except block. In<br>the except block, a regular expression search method is utilized to determine whether<br>the duplicate word and the username/email are present. If they are present, a<br>user-friendly message is displayed stating that the username/email has already been taken.<br></p><br></td></tr>
 </table></td></tr>
@@ -144,7 +144,7 @@
 </td></tr>
 </table></td></tr>
 <tr><td> <em>Sub-Task 2: </em> Add the related pull request(s) for this feature</td></tr>
-<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/rk268/IS601/pull/29">https://github.com/rk268/IS601/pull/29</a> </td></tr>
+<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/rk268/IS601/pull/30">https://github.com/rk268/IS601/pull/30</a> </td></tr>
 <tr><td> <em>Sub-Task 3: </em> Explain briefly how the process/code works (view only)</td></tr>
 <tr><td> <em>Response:</em> <p>When a user logs in, their data is retrieved from the session data.<br>This session data is then converted into a dictionary using the json.loads() function.<br>The dictionary items are then passed into the user object. Once the user<br>object is filled with the retrieved data, it is passed into the form<br>object. The data passed into the form object is then internally prefilled by<br>the WTF forms.<br></p><br></td></tr>
 </table></td></tr>
@@ -172,7 +172,7 @@
 </td></tr>
 </table></td></tr>
 <tr><td> <em>Sub-Task 3: </em> Add the related pull request(s) for this feature</td></tr>
-<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/rk268/IS601/pull/29">https://github.com/rk268/IS601/pull/29</a> </td></tr>
+<tr><td> <a rel="noreferrer noopener" target="_blank" href="https://github.com/rk268/IS601/pull/30">https://github.com/rk268/IS601/pull/30</a> </td></tr>
 <tr><td> <em>Sub-Task 4: </em> Explain briefly how the process/code works (edit only)</td></tr>
 <tr><td> <em>Response:</em> <div>1)I have developed two distinct forms, one for modifying the username and email,<br>and the other for updating the password. 2)These forms have been implemented as<br>separate classes in the forms.py file and are displayed on the user's landing<br>page.</div><div><br></div><div>3)The username and email fields in the form are pre-filled with the session<br>data obtained from the login endpoint. When the user submits the form, their<br>entered username and email are checked against the old session data. If they<br>are the same, no changes are made. If they are different, an update<br>query is executed, and the session data is updated upon successful completion. In<br>case the user enters an existing username as their desired new username/email, a<br>duplicate key error is thrown, which is handled using an exception block and<br>a user-friendly message is displayed.</div><div><br></div><div>4)The second form is used for changing the user's<br>password. If the old password entered by the user does not match the<br>original password from the session, a friendly message is shown. Only if the<br>entered password matches the original password, the password is changed.</div><div><br></div><div>5)The form classes created<br>handle the validations, including checking for duplicate usernames or emails. In case of<br>a duplicate key error, a proper user-friendly message is displayed.</div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><br></td></tr>
 </table></td></tr>
