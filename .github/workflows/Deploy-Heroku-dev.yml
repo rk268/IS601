@@ -6,8 +6,6 @@ name: Deploy to heroku dev.
 on:
   push:
     branches:
-      - mp3-dev
-      - MiniProject-3
       - dev
       - Milestone1
 
@@ -19,7 +17,7 @@ jobs:
       DB_URL: ${{secrets.DB_URL}}
       PORT: 8080
       # change to the project directory you're deploying
-      WORKING_DIRECTORY: Project
+      WORKING_DIRECTORY: project
     defaults:
       run:
           working-directory: ${{env.WORKING_DIRECTORY}}
@@ -48,7 +46,7 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           
           # Name of the heroku application to which the build is to be sent.
-          heroku_app_name: ${{ secrets.HEROKU_APP_MP3_DEV }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME_DEV }}
 
           # (Optional, default: "./")
           # Dockerfile directory.

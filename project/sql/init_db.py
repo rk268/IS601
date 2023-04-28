@@ -8,7 +8,7 @@ print(os.path.dirname(os.path.abspath(__file__)))
 mypath = os.path.dirname(os.path.abspath(__file__))
 files = glob.glob(glob.escape(mypath)+"/*.sql")
 queries = []
-# read .sql file contents
+# read .sql file contentss
 for f in files:
     with open(f, "r") as file:
         queries.append({
