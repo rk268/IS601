@@ -154,15 +154,15 @@ def deposit():
     if form.validate_on_submit():
         try:
             acc_id = form.account.data
-            src_expected_total = expected_balance(-1, form.funds.data*-1)
+            src_expected_total = expected_balance(1, form.funds.data*-1)
             trans1 = DB.insertOne("INSERT INTO IS601_Transactions (account_src, account_dest, balance_change, expected_total, transaction_type, memo) VALUES (%s, %s, %s, %s, %s, %s)",
-            -1, acc_id, form.funds.data*-1, src_expected_total, "Deposit", form.memo.data)
+            1, acc_id, form.funds.data*-1, src_expected_total, "Deposit", form.memo.data)
 
             dst_expected_total = expected_balance(acc_id, form.funds.data)
             trans2 = DB.insertOne("INSERT INTO IS601_Transactions (account_src, account_dest, balance_change, expected_total, transaction_type, memo) VALUES (%s, %s, %s, %s, %s, %s)",
-            acc_id, -1, form.funds.data, dst_expected_total, "Deposit", form.memo.data)
+            acc_id, 1, form.funds.data, dst_expected_total, "Deposit", form.memo.data)
 
-            refresh_account(-1)
+            refresh_account(1)
             refresh_account(acc_id)
             form = DepositWithdrawForm(accounts=rows)
             flash(f"Successfully deposited ${form.funds.data}", "success")
@@ -192,14 +192,14 @@ def withdraw():
                 return render_template("deposit_withdraw_form.html", form=form, type="Withdraw")
 
             trans1 = DB.insertOne("INSERT INTO IS601_Transactions (account_src, account_dest, balance_change, expected_total, transaction_type, memo) VALUES (%s, %s, %s, %s, %s, %s)",
-            acc_id, -1, form.funds.data*-1, src_expected_total, "Withdraw", form.memo.data)
+            acc_id, 1, form.funds.data*-1, src_expected_total, "Withdraw", form.memo.data)
 
-            dst_expected_total = expected_balance(-1, form.funds.data)
+            dst_expected_total = expected_balance(1, form.funds.data)
             trans2 = DB.insertOne("INSERT INTO IS601_Transactions (account_src, account_dest, balance_change, expected_total, transaction_type, memo) VALUES (%s, %s, %s, %s, %s, %s)",
-            -1, acc_id, form.funds.data, dst_expected_total, "Withdraw", form.memo.data)
+            1, acc_id, form.funds.data, dst_expected_total, "Withdraw", form.memo.data)
 
             # Calculate what the expected total would be for each account of the transaction pair
-            refresh_account(-1)
+            refresh_account(1)
             refresh_account(acc_id)
 
             form = DepositWithdrawForm(accounts=rows)
