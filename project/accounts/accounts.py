@@ -78,7 +78,24 @@ def create():
 def list():
     user_id = current_user.get_id()
     form = CreateAccountForm()
-    return render_template("account_form.html", form=form, type="Create")
+    user_id = current_user.get_id()
+    rows = [] 
+    try:
+        result = DB.selectAll("SELECT account_number, account_type, modified, balance FROM IS601_Accounts WHERE user_id=%s LIMIT 5", user_id)
+        if result.status and result.rows:
+            rows = result.rows
+    except Exception as e:
+        print(e)
+        flash("Error getting accounts", "danger")
+    return render_template("accounts_list.html", rows=rows)
+
+@accounts.route("/transactions", methods=["GET"])
+@login_required
+def transactions():
+
+    return render_template("transactions_list.html",rows=rows)
+
+    
 
     
 
