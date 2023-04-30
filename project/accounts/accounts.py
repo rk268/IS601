@@ -55,7 +55,7 @@ def create():
             src_expected_total = expected_balance(1, form.funds.data*-1)
             trans1 = DB.insertOne("INSERT INTO IS601_Transactions (account_src, account_dest, balance_change, expected_total, transaction_type, memo) VALUES (%s, %s, %s, %s, %s, %s)",
             1, user_account_id, form.funds.data*-1, src_expected_total, "Deposit", "")
-            #if trans1.statuss:
+            #if trans1.statussS:
             #    flash("success1111","success")
             dst_expected_total = expected_balance(acc_number, 0)
             trans2 = DB.insertOne("INSERT INTO IS601_Transactions (account_src, account_dest, balance_change, expected_total, transaction_type, memo) VALUES (%s, %s, %s, %s, %s, %s)",
@@ -92,8 +92,51 @@ def list():
 @accounts.route("/transactions", methods=["GET"])
 @login_required
 def transactions():
+    user_id = current_user.get_id()
+    acc_number = request.args.get("acc_number")
+    page = request.args.get('page', 1, type=int)
+    items_per_page = 10
+    start_date = request.args.get('start_date', '' )
+    end_date = request.args.get('end_date', '' )
+    transaction_type = request.args.get('transaction_type', '' )
 
-    return render_template("transactions_list.html",rows=rows)
+    account = {}
+    try:
+        result = DB.selectOne("SELECT id, account_number, account_type, created, modified, balance FROM IS601_Accounts WHERE account_number=%s AND user_id=%s LIMIT 1", acc_number, user_id)
+        if result.status and result.row:
+            account = result.row
+    except Exception as e:
+        print(e)
+        flash("Error getting account", "danger")
+
+    rows = [] 
+    try:
+        query = f"SELECT (SELECT account_number FROM IS601_Accounts WHERE id=transactions.account_src) as account_src, (SELECT account_number FROM IS601_Accounts WHERE id=transactions.account_dest) as  account_dest, transaction_type, balance_change, expected_total, created as occured, Memo FROM IS601_Transactions transactions WHERE account_src={account['id']}"
+
+        if start_date != '':
+            query += f" AND created >= '{start_date}'"
+
+        if end_date != '':
+            query += f" AND created <= '{end_date}'"
+
+        if transaction_type != '':
+            query += f" AND transaction_type LIKE '{transaction_type}'"
+
+        query += f" ORDER BY id DESC LIMIT 100"
+
+        print(query)
+        result = DB.selectAll(query)
+        if result.status and result.rows:
+            rows = result.rows
+    except Exception as e:
+        print(e)
+        flash("Error getting account transactions", "danger")
+
+    start_pos = 0 if page == 1 else items_per_page * (page - 1) 
+    pages = math.ceil(len(rows)/10)
+    rows = rows[start_pos: start_pos + items_per_page]
+
+    return render_template("transactions_list.html",rows=rows, pages=pages, current_page=page, account=account)
 
     
 
