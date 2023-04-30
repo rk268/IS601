@@ -3,7 +3,7 @@ import datetime
 from flask import Blueprint, flash, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 from sql.db import DB
-from accounts.forms import CreateAccountForm
+from accounts.forms import CreateAccountForm, DepositWithdrawForm
 from werkzeug.datastructures import MultiDict
 accounts = Blueprint('accounts', __name__, url_prefix='/accounts',template_folder='templates')
 
@@ -138,23 +138,82 @@ def transactions():
 
     return render_template("transactions_list.html",rows=rows, pages=pages, current_page=page, account=account)
 
-    
-
-    
-
 @accounts.route("/deposit", methods=["GET","POST"])
 @login_required
 def deposit():
     user_id = current_user.get_id()
-    form = CreateAccountForm()
-    return render_template("account_form.html", form=form, type="Create")
+    rows = [] 
+    try:
+        result = DB.selectAll("SELECT id, account_number, account_type, modified, balance FROM IS601_Accounts WHERE user_id=%s LIMIT 100", user_id)
+        if result.status and result.rows:
+            rows = result.rows
+    except Exception as e:
+        print(e)
+
+    form = DepositWithdrawForm(accounts=rows)
+    if form.validate_on_submit():
+        try:
+            acc_id = form.account.data
+            src_expected_total = expected_balance(-1, form.funds.data*-1)
+            trans1 = DB.insertOne("INSERT INTO IS601_Transactions (account_src, account_dest, balance_change, expected_total, transaction_type, memo) VALUES (%s, %s, %s, %s, %s, %s)",
+            -1, acc_id, form.funds.data*-1, src_expected_total, "Deposit", form.memo.data)
+
+            dst_expected_total = expected_balance(acc_id, form.funds.data)
+            trans2 = DB.insertOne("INSERT INTO IS601_Transactions (account_src, account_dest, balance_change, expected_total, transaction_type, memo) VALUES (%s, %s, %s, %s, %s, %s)",
+            acc_id, -1, form.funds.data, dst_expected_total, "Deposit", form.memo.data)
+
+            refresh_account(-1)
+            refresh_account(acc_id)
+            form = DepositWithdrawForm(accounts=rows)
+            flash(f"Successfully deposited ${form.funds.data}", "success")
+        except Exception as e:
+            flash(f"Error depositing into account - {e}", "danger")
+    return render_template("deposit_withdraw_form.html", form=form, type="Deposit")
 
 @accounts.route("/withdraw", methods=["GET","POST"])
 @login_required
 def withdraw():
     user_id = current_user.get_id()
-    form = CreateAccountForm()
-    return render_template("account_form.html", form=form, type="Create")
+    rows = [] 
+    try:
+        result = DB.selectAll("SELECT id, account_number, account_type, modified, balance FROM IS601_Accounts WHERE user_id=%s LIMIT 100", user_id)
+        if result.status and result.rows:
+            rows = result.rows
+    except Exception as e:
+        print(e)
+
+    form = DepositWithdrawForm(accounts=rows)
+    if form.validate_on_submit():
+        try:
+            acc_id = form.account.data
+            src_expected_total = expected_balance(acc_id, form.funds.data*-1)
+            if src_expected_total < 0:
+                flash("Amount being withdrawn exceeds balance!", "danger")
+                return render_template("deposit_withdraw_form.html", form=form, type="Withdraw")
+
+            trans1 = DB.insertOne("INSERT INTO IS601_Transactions (account_src, account_dest, balance_change, expected_total, transaction_type, memo) VALUES (%s, %s, %s, %s, %s, %s)",
+            acc_id, -1, form.funds.data*-1, src_expected_total, "Withdraw", form.memo.data)
+
+            dst_expected_total = expected_balance(-1, form.funds.data)
+            trans2 = DB.insertOne("INSERT INTO IS601_Transactions (account_src, account_dest, balance_change, expected_total, transaction_type, memo) VALUES (%s, %s, %s, %s, %s, %s)",
+            -1, acc_id, form.funds.data, dst_expected_total, "Withdraw", form.memo.data)
+
+            # Calculate what the expected total would be for each account of the transaction pair
+            refresh_account(-1)
+            refresh_account(acc_id)
+
+            form = DepositWithdrawForm(accounts=rows)
+            flash(f"Successfully withdrew ${form.funds.data}", "success")
+        except Exception as e:
+            flash(f"Error withdrawing from account - {e}", "danger")
+    return render_template("deposit_withdraw_form.html", form=form, type="Withdraw")
+
+
+    
+
+    
+
+
 
 @accounts.route("/transfer", methods=["GET","POST"])
 @login_required
