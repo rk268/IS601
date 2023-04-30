@@ -55,7 +55,7 @@ def create():
             src_expected_total = expected_balance(1, form.funds.data*-1)
             trans1 = DB.insertOne("INSERT INTO IS601_Transactions (account_src, account_dest, balance_change, expected_total, transaction_type, memo) VALUES (%s, %s, %s, %s, %s, %s)",
             1, user_account_id, form.funds.data*-1, src_expected_total, "Deposit", "")
-            #if trans1.statuss:
+            #if trans1.statussS:
             #    flash("success1111","success")
             dst_expected_total = expected_balance(acc_number, 0)
             trans2 = DB.insertOne("INSERT INTO IS601_Transactions (account_src, account_dest, balance_change, expected_total, transaction_type, memo) VALUES (%s, %s, %s, %s, %s, %s)",
