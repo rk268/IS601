@@ -210,6 +210,7 @@ def withdraw():
 
 @accounts.route("/transfer", methods=["GET","POST"])
 @login_required
+#rk268 1st May 2023
 def transfer():
     user_id = current_user.get_id()
     rows = [] 
@@ -221,6 +222,7 @@ def transfer():
         print(e)
 
     form = TransferForm(accounts=rows)
+    # rk268 1st May 2023
     if form.validate_on_submit():
         if form.account_src.data == form.account_dest.data:
             flash("Transfer between 2 same accounts is not expected/allowed", "danger")
