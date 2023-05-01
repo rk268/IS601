@@ -188,7 +188,7 @@ def withdraw():
             acc_id = form.account.data
             src_expected_total = expected_balance(acc_id, form.funds.data*-1)
             if src_expected_total < 0:
-                flash("Amount being withdrawn exceeds balance!", "danger")
+                flash("Attempting to withdraw more amount than balance.Please check balance before withdrawing", "danger")
                 return render_template("deposit_withdraw_form.html", form=form, type="Withdraw")
 
             trans1 = DB.insertOne("INSERT INTO IS601_Transactions (account_src, account_dest, balance_change, expected_total, transaction_type, memo) VALUES (%s, %s, %s, %s, %s, %s)",
