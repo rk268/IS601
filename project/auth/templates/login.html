@@ -2,13 +2,24 @@
 {% block title %}Login{% endblock %}
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
-<div class="container-fluid">
-    <div class="h3">Login</div>
+<div class="container-fluid d-flex flex-column align-items-right justify-content-center">
+    <div class="h1 text-right">SIMPLE BANK</div>
+    <div class="my-5">
+
+        <img height="300" src = "https://user-images.githubusercontent.com/123113077/235769177-e060722f-bb22-4153-b5db-42ddaa7281cd.png" class="center">
+        <marquee>BROUGHT TO YOU BY RUPAK(RK268)</marquee>
+    </div>
+    
+    <div class="h2 text-right">LOGIN</div>
     <form method="POST">
         {{ form.hidden_tag() }}
         {{render_field(form.email)}}
         {{render_field(form.password)}}
-        {{form.submit(class="btn btn-primary")}}
+        <div class=text-center>{{form.submit(class="btn btn-primary mt-3 ")}}</div>
+        
     </form>
 </div>
-{% endblock %}
+{% endblock %}
+
+
+
