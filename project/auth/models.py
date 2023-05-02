@@ -2,10 +2,12 @@ from flask_login import UserMixin
 from common.utils import JsonSerializable
 
 class User(UserMixin, JsonSerializable):
-    def __init__(self, id, email, username, roles = []):
+    def __init__(self, id, email, username, FIRSTNAME, LASTNAME, roles = []):
         self.id = id
         self.email = email
         self.username = username
+        self.FIRSTNAME = FIRSTNAME
+        self.LASTNAME = LASTNAME
         # pseudo-serializer for loading from json (map dict role to Role)
         if roles and type(roles[0]) == dict:
             from roles.models import Role

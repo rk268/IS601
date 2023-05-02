@@ -27,3 +27,5 @@ INSERT IGNORE INTO
         expected_total
     )
 VALUES (1, 1, 1, 999999999, 'Deposit', 'Start Deposit',999999999);
+
+DROP TABLE IS601_Accounts
