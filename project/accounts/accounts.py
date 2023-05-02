@@ -305,7 +305,7 @@ def ext_transfer():
         refresh_account(form.account_src.data)
 
         form = ExtTransferForm(accounts=rows)
-        flash(f"Transferred ${form.funds.data} from account number {dest_user_account.row['account_number']}  to {form.LASTNAME.data}", "success")
+        flash(f"Transferred ${form.funds.data} to account number {dest_user_account.row['account_number']}  named {form.LASTNAME.data}", "success")
 
 
     return render_template("ext_transfer_form.html", form=form)
