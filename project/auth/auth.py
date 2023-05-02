@@ -17,6 +17,7 @@ auth = Blueprint('auth', __name__, url_prefix='/',template_folder='templates')
 
 @auth.route("/register", methods=["GET","POST"])
 def register():
+    #rk268 5/2/23
     form = RegisterForm()
     # wtform validators are both client-side and server-side
     if form.validate_on_submit():
@@ -38,6 +39,7 @@ def register():
 
 @auth.route("/login", methods=["GET", "POST"])
 def login():
+    #rk268 5/2/23
     form = LoginForm()
     if form.validate_on_submit():
         is_valid = True
@@ -97,12 +99,14 @@ def login():
 
 @auth.route("/landing-page", methods=["GET"])
 @login_required
+#rk268 5/2/23
 def landing_page():
     
     return render_template("landing_page.html")
 
 @auth.route("/logout", methods=["GET"])
 def logout():
+    #rk268 5/2/23
     logout_user()
      # Remove session keys set by Flask-Principal
     for key in ('identity.name', 'identity.auth_type'):
@@ -116,6 +120,7 @@ def logout():
 
 @auth.route("/profile", methods=["GET", "POST"])
 @login_required
+#rk268 5/2/23
 def profile():
     user_id = current_user.get_id()
     form = ProfileForm()
@@ -175,3 +180,4 @@ def profile():
     except Exception as e:
         flash(e, "danger")
     return render_template("profile.html", form=form)
+#rk268 5/2/23
