@@ -262,6 +262,7 @@ def ext_transfer():
         print(e)
 
     form = ExtTransferForm(accounts=rows)
+    #rk268 5/2/23
     if form.validate_on_submit():
         src_expected_total = expected_balance(form.account_src.data, form.funds.data*-1)
         if src_expected_total < 0:
@@ -276,10 +277,13 @@ def ext_transfer():
                 flash("account not found in the database", "danger")
                 return render_template("ext_transfer_form.html", form=form)
 
-        dest_user = DB.selectOne("SELECT id FROM IS601_Users WHERE LASTNAME LIKE %s AND id=%s LIMIT 1", form.LASTNAME.data, dest_user_id)
+        
         try:
+            dest_user_id = dest_user_account.row['user_id']
+            dest_user = DB.selectOne("SELECT id FROM IS601_Users WHERE LASTNAME LIKE %s AND id=%s LIMIT 1", form.LASTNAME.data, dest_user_id)
             dest_user.row['id']
         except:
+            #rk268 5/2/23
             flash("account not found in the database", "danger")
             return render_template("ext_transfer_form.html", form=form)
 
@@ -301,7 +305,7 @@ def ext_transfer():
         refresh_account(form.account_src.data)
 
         form = ExtTransferForm(accounts=rows)
-        flash(f"Transferred ${form.funds.data} from to {form.LASTNAME.data} - account number {dest_user_account.row['account_number']}", "success")
+        flash(f"Transferred ${form.funds.data} from account number {dest_user_account.row['account_number']}  to {form.LASTNAME.data}", "success")
 
 
     return render_template("ext_transfer_form.html", form=form)
