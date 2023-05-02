@@ -24,6 +24,7 @@ class DepositWithdrawForm(FlaskForm):
             self.account.choices = [(c['id'], f"{c['account_type']} Account - {c['account_number']}") for c in accounts]
 
 class TransferForm(FlaskForm):
+    #rk268 1st May 2023
     account_src = SelectField("Account Source", choices=[], validators=[DataRequired()])
     account_dest = SelectField("Account Destination", choices=[], validators=[DataRequired()])
     funds = FloatField("Funds", validators=[InputRequired(),NumberRange(min=1)])
