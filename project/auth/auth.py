@@ -120,14 +120,11 @@ def logout():
 
 @auth.route("/profile", methods=["GET", "POST"])
 @login_required
-#rk268 5/2/23
 def profile():
     user_id = current_user.get_id()
     form = ProfileForm()
     if form.validate_on_submit():
         is_valid = True
-        FIRSTNAME = form.FIRSTNAME.data
-        LASTNAME =  form.LASTNAME.data
         email = form.email.data
         username = form.username.data
         import re
@@ -137,6 +134,8 @@ def profile():
             flash("Invalid username", "danger")
         current_password = form.current_password.data
         password = form.password.data
+        FIRSTNAME = form.FIRSTNAME.data
+        LASTNAME = form.LASTNAME.data
         confirm = form.confirm.data
         # handle password change only if all 3 are provided
         if current_password and password and confirm:
@@ -152,22 +151,22 @@ def profile():
                             if result.status:
                                 flash("Updated password", "success")
                         except Exception as ue:
-                            flash(ue, "danger")
+                            flash(f"Failed to update password : {ue}", "danger")
                     else:
                         flash("Invalid password","danger")
             except Exception as se:
-                flash(se, "danger")
+                flash(f"Password could not be retrieved : {se}", "danger")
         
         if is_valid:
             try: # update email, username (this will trigger if nothing changed but it's fine)
-                result = DB.update("UPDATE IS601_Users SET email = %s, username = %s, FIRSTNAME = %s, LASTNAME = %s WHERE id = %s", email, username, FIRSTNAME,LASTNAME, user_id)
+                result = DB.update("UPDATE IS601_Users SET email = %s, username = %s, FIRSTNAME=%s, LASTNAME=%s WHERE id = %s", email, username, FIRSTNAME,LASTNAME, user_id)
                 if result.status:
                     flash("Saved profile", "success")
             except Exception as e:
-                flash(e, "danger")
+                flash(f"Error! Failed to update the profile because {e}", "danger")
     try:
         # get latest info if anything changed
-        result = DB.selectOne("SELECT id, email, username,FIRSTNAME,LASTNAME  FROM IS601_Users where id = %s", user_id)
+        result = DB.selectOne("SELECT id, email, username, FIRSTNAME,LASTNAME FROM IS601_Users where id = %s", user_id)
         if result.status and result.row:
             user = User(**result.row)
             form = ProfileForm(obj=user)
@@ -178,6 +177,5 @@ def profile():
             current_user.LASTNAME = user.LASTNAME
             session["user"] = current_user.toJson()
     except Exception as e:
-        flash(e, "danger")
-    return render_template("profile.html", form=form)
-#rk268 5/2/23
+        flash("Failed to retrieve updated info", "danger")
+    return render_template("profile.html",form=form)
